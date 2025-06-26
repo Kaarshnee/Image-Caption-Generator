@@ -5,6 +5,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.applications.xception import Xception, preprocess_input
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
+from tensorflow.keras.preprocessing.text import tokenizer_from_json
+import json
 from PIL import Image
 import io
 
@@ -17,8 +19,10 @@ st.write("Upload an image and get an AI-generated caption using a trained deep l
 # Load tokenizer and metadata
 @st.cache_resource
 def load_tokenizer_metadata():
-    with open('tokenizer.pkl', 'rb') as f:
-        tokenizer = pickle.load(f)
+    with open('tokenizer.json') as f:
+        tokenizer = tokenizer_from_json(json.load(f))
+    #with open('tokenizer.pkl', 'rb') as f:
+        #tokenizer = pickle.load(f)
     with open('metadata.pkl', 'rb') as f:
         metadata = pickle.load(f)
     return tokenizer, metadata['max_length']
