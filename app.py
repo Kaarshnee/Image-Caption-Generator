@@ -19,10 +19,10 @@ st.write("Upload an image and get an AI-generated caption using a trained deep l
 # Load tokenizer and metadata
 @st.cache_resource
 def load_tokenizer_metadata():
-    with open('tokenizer.json', 'r') as f:  
-        tokenizer = tokenizer_from_json(f.read())  
-    #with open('tokenizer.pkl', 'rb') as f:
-        #tokenizer = pickle.load(f)
+    #with open('tokenizer.json', 'r') as f:  
+        #tokenizer = tokenizer_from_json(f.read())  
+    with open('tokenizer.pkl', 'rb') as f:
+        tokenizer = pickle.load(f)
     with open('metadata.pkl', 'rb') as f:
         metadata = pickle.load(f)
     return tokenizer, metadata['max_length']
